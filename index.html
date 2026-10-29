@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>오늘의 옷</title>
+<link rel="stylesheet" href="https://use.typekit.net/tde8evh.css">
+<style>
+  html, body { margin: 0; height: 100%; background: #fff; }
+  body {
+    display: grid; place-items: center; grid-template-columns: minmax(0, 1fr);
+    padding: 16px; box-sizing: border-box;
+    font-family: "agahnsangsoo2012", sans-serif; color: #111;
+  }
+  svg { width: 100%; max-width: 560px; height: auto; max-height: calc(100vh - 32px); }
+  .dot  { fill: none; stroke: #111; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 0 9; }
+  .lead { fill: none; stroke: #111; stroke-width: 1.5; stroke-dasharray: 2 5; }
+  .part { font-size: 20px; fill: #000; }
+  .name { font-size: 26px; fill: #111; }
+  #date {
+    position: fixed; top: 16px; left: 16px;
+    font: inherit; font-size: 32px; color: #000;
+    background: none; border: 0; border-bottom: 2px dotted #000; padding: 0 0 2px; cursor: pointer;
+  }
+  #cal {
+    inset: 68px auto auto 16px; margin: 0; width: 252px; padding: 14px;
+    font-family: inherit; color: #000; background: #fff; border: 2px dotted #000;
+  }
+  #days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; text-align: center; }
+  #days b { font-weight: normal; font-size: 12px; color: #888; padding-bottom: 4px; }
+  #days button {
+    aspect-ratio: 1; font: inherit; font-size: 14px; color: #000;
+    background: none; border: 1.5px dotted transparent; border-radius: 50%; cursor: pointer;
+  }
+  #days button:hover, #days .today { border-color: #000; }
+  #days .on { background: #000; color: #fff; }
+  #list { list-style: none; margin: 14px 0 0; padding: 12px 0 0; border-top: 2px dotted #000; }
+  #list li { display: flex; gap: 12px; font-size: 20px; padding: 3px 0; }
+  #list li span { width: 64px; color: #000; font-size: 18px; align-self: center; }
+  #list .head { font-size: 14px; color: #888; padding-bottom: 6px; }
+  /* 폰: 그림이 0.65배쯤 줄어드니 글씨·선을 키워서 보정 */
+  @media (max-width: 600px) {
+    body { padding-top: 72px; }
+    svg { max-height: none; }
+    .part { font-size: 26px; transform: translateY(-10px); }
+    .name { font-size: 36px; }
+    .lead { stroke-width: 2.5; }
+    #date { font-size: 28px; }
+    #cal { inset: 60px 16px auto 16px; width: auto; }
+    #days button { font-size: 16px; -webkit-tap-highlight-color: transparent; }
+    #list li { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+<button id="date" popovertarget="cal"></button>
+<div id="cal" popover>
+  <div id="days"></div>
+  <ol id="list"></ol>
+</div>
+<svg viewBox="0 0 560 620" role="img" aria-label="점선 옷 아웃라인과 오늘 맡은 조원">
+  <g transform="translate(80 0)">
+    <!-- 모자 -->
+    <path class="dot" d="M160 104 Q160 58 200 58 Q240 58 240 104 L274 108 L160 108 Z"/>
+    <!-- 상의 -->
+    <path class="dot" d="M160 165 L240 165 L290 215 L268 240 L248 222 L248 330 L152 330 L152 222 L132 240 L110 215 Z M184 165 Q200 182 216 165"/>
+    <!-- 하의 -->
+    <path class="dot" d="M152 334 L248 334 L256 536 L212 536 L200 382 L188 536 L144 536 Z"/>
+    <!-- 신발 -->
+    <path class="dot" d="M142 542 L190 542 L190 566 L122 566 Q122 548 142 542 Z M210 542 L258 542 Q278 548 278 566 L210 566 Z"/>
+    <!-- 아이템 -->
+    <path class="dot" d="M272 378 H324 V432 H272 Z M282 378 Q298 340 314 378"/>
+  </g>
+
+  <!-- 이름표 -->
+  <path class="lead" d="M360 84 H440"/>
+  <text x="448" y="76" class="part">모자</text><text x="448" y="104" id="hat" class="name"></text>
+
+  <path class="lead" d="M232 250 H120"/>
+  <text x="112" y="242" class="part" text-anchor="end">상의</text><text x="112" y="270" id="top" class="name" text-anchor="end"></text>
+
+  <path class="lead" d="M236 440 H120"/>
+  <text x="112" y="432" class="part" text-anchor="end">하의</text><text x="112" y="460" id="bottom" class="name" text-anchor="end"></text>
+
+  <path class="lead" d="M362 556 H440"/>
+  <text x="448" y="548" class="part">신발</text><text x="448" y="576" id="shoes" class="name"></text>
+
+  <path class="lead" d="M406 405 H440"/>
+  <text x="448" y="397" class="part">아이템</text><text x="448" y="425" id="item" class="name"></text>
+</svg>
+<script src="assign.js"></script>
+</body>
+</html>
