@@ -5,9 +5,6 @@ const MEMBERS = ['승현', '물결', '하연', '하린', '서빈'];
 const FIXED = { hat: '승현', top: '서빈', bottom: '하연', shoes: '물결', item: '하린' }; // 10/29~10/30
 // 사람 = 색 (2026-11-19부터, 피스 사이트와 같음). 그날 맡은 사람 색으로 부위가 칠해짐
 const MEMBER_COLORS = { 물결: '#8A4B2A', 서빈: '#6EC8FF', 승현: '#FF7F11', 하린: '#FFD84D', 하연: '#FF4F6D' };
-// 비교용 E 팔레트: 주소에 ?p=e (피스 사이트 compare.html에서 씀)
-if (typeof location !== 'undefined' && new URLSearchParams(location.search).get('p') === 'e')
-  Object.assign(MEMBER_COLORS, { 물결: '#C8F32B', 서빈: '#6A2BFF', 승현: '#FF2E93', 하린: '#00D4C0', 하연: '#FF7A00' });
 const DAY = 864e5;
 const FIRST_DAY = Date.UTC(2026, 9, 29);
 const RANDOM_START = Date.UTC(2026, 9, 31); // 10/31 아침 8시부터 랜덤
