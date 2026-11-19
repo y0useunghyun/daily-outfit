@@ -3,7 +3,8 @@ const PARTS = ['hat', 'top', 'bottom', 'shoes', 'item'];
 const PART_NAMES = { hat: '모자', top: '상의', bottom: '하의', shoes: '신발', item: '아이템' };
 const MEMBERS = ['승현', '물결', '하연', '하린', '서빈'];
 const FIXED = { hat: '승현', top: '서빈', bottom: '하연', shoes: '물결', item: '하린' }; // 10/29~10/30
-const PALETTE = ['#FF2E93', '#1FD655', '#2D5BFF', '#FF6A00', '#9B3BFF', '#00C2D1', '#FF3B30', '#E5B800'];
+// 사람 = 색 (2026-11-19부터, 피스 사이트와 같음). 그날 맡은 사람 색으로 부위가 칠해짐
+const MEMBER_COLORS = { 물결: '#8A4B2A', 서빈: '#6EC8FF', 승현: '#FF7F11', 하린: '#FFD84D', 하연: '#FF4F6D' };
 const DAY = 864e5;
 const FIRST_DAY = Date.UTC(2026, 9, 29);
 const RANDOM_START = Date.UTC(2026, 9, 31); // 10/31 아침 8시부터 랜덤
@@ -43,7 +44,7 @@ function render() {
   const day = selected ?? today;
   const future = day > today; // 아직 안 온 날은 물음표
   const a = future ? Object.fromEntries(PARTS.map((p) => [p, '?'])) : assign(day);
-  const colors = future ? PARTS.map(() => '#000') : shuffle(PALETTE, day / DAY + 1); // 날마다 부위 색도 바뀜
+  const colors = PARTS.map((p) => MEMBER_COLORS[a[p]] ?? '#000'); // 아직 안 온 날(?)은 검정
   const dots = document.querySelectorAll('.dot');  // 마크업 순서 = PARTS 순서
   const leads = document.querySelectorAll('.lead');
   const labels = document.querySelectorAll('.part');
@@ -55,7 +56,7 @@ function render() {
   });
   document.getElementById('date').textContent = md(day);
   document.getElementById('list').innerHTML =
-    `<li class="head">${md(day)}</li>` + PARTS.map((p) => `<li><span>${PART_NAMES[p]}</span>${a[p]}</li>`).join('');
+    `<li class="head">${md(day)}</li>` + PARTS.map((p, i) => `<li><span>${PART_NAMES[p]}</span><b style="color:${colors[i]}">${a[p]}</b></li>`).join('');
   renderCalendar(today, day);
 }
 
