@@ -8,7 +8,7 @@ const MEMBER_COLORS = { 물결: '#8A4B2A', 서빈: '#6EC8FF', 승현: '#FF7F11',
 const DAY = 864e5;
 const FIRST_DAY = Date.UTC(2026, 9, 29);
 const RANDOM_START = Date.UTC(2026, 9, 31); // 10/31 아침 8시부터 랜덤
-const LAST_DAY = RANDOM_START + 29 * DAY;   // 30일 → 11/29, 이후엔 마지막 날 배정 유지
+const LAST_DAY = Date.UTC(2026, 11, 4);    // 12/4까지 (피스 영수증 기간과 같음), 이후엔 마지막 날 배정 유지
 
 // KST(+9h)에서 8시간 당기면 자정 기준 날짜가 됨
 const dayOf = (t) => Math.floor((t + 1 * 3600e3) / DAY) * DAY;
